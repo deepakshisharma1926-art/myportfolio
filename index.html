@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        html,
+        body,
+        #app-wrapper {
+            height: 100%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-content {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-image {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .skill-card {
+            animation: fadeIn 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-card {
+            animation: fadeIn 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.25);
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6366f1;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, transparent);
+            border-radius: 2px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: #6366f1;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #e0e7ff;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 25px;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: #e0e7ff;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
+    <div id="app-wrapper" class="h-full w-full overflow-auto"
+        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);"><!-- Navigation -->
+        <nav class="sticky top-0 z-50"
+            style="background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(99, 102, 241, 0.1);">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text code-font">
+                    &lt;DS&gt;
+                </div>
+                <div class="hidden md:flex gap-8"><a href="#about"
+                        class="nav-link text-gray-300 hover:text-white transition">About</a> <a href="#skills"
+                        class="nav-link text-gray-300 hover:text-white transition">Skills</a> <a href="#projects"
+                        class="nav-link text-gray-300 hover:text-white transition">Projects</a> <a href="#education"
+                        class="nav-link text-gray-300 hover:text-white transition">Education</a> <a href="#contact"
+                        class="nav-link text-gray-300 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </nav><!-- Hero Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="grid md:grid-cols-2 gap-12 items-center"><!-- Left Side -->
+                <div class="hero-content"><span class="badge">👋 Welcome to my portfolio</span>
+                    <h1 class="text-5xl md:text-6xl font-bold mt-6 mb-4" style="color: #f1f5f9;">Hi, I'm <span
+                            class="gradient-text" id="full-name-hero">Deepakshi Sharma</span></h1>
+                    <p class="text-xl md:text-2xl font-medium mb-4" id="headline-hero" style="color: #cbd5e1;">Web
+                        Developer | Crafting Beautiful Digital Experiences</p>
+                    <p class="text-lg mb-8" id="about-hero" style="color: #94a3b8; line-height: 1.8;">Fresh BCA graduate
+                        passionate about creating responsive, user-friendly web applications. I combine creativity with
+                        clean code to build solutions that matter.</p>
+                    <div class="flex gap-4 flex-wrap"><a id="github-link" href="#" target="_blank"
+                            rel="noopener noreferrer" class="cta-button px-8 py-3 rounded-lg text-white font-semibold">
+                            View My GitHub </a> <a id="linkedin-link" href="#" target="_blank" rel="noopener noreferrer"
+                            class="px-8 py-3 rounded-lg font-semibold"
+                            style="background: rgba(99, 102, 241, 0.1); color: #6366f1; border: 2px solid #6366f1; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='#6366f1'; this.style.color='white';"
+                            onmouseout="this.style.background='rgba(99, 102, 241, 0.1)'; this.style.color='#6366f1';">
+                            LinkedIn Profile </a>
+                    </div>
+                </div><!-- Right Side - Illustration -->
+                <div class="hero-image hidden md:flex justify-center">
+                    <div class="relative w-64 h-64 float-animation">
+                        <svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><!-- Background Circle -->
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="#6366f1" stroke-width="2"
+                                opacity="0.3" />
+                            <circle cx="100" cy="100" r="85" fill="none" stroke="#a855f7" stroke-width="1"
+                                opacity="0.2" /> <!-- Code Brackets -->
+                            <g style="color: #6366f1;">
+                                <text x="40" y="80" font-size="40" font-weight="bold" fill="#6366f1" opacity="0.3">
+                                    &lt;
+                                </text>
+                                <text x="140" y="140" font-size="40" font-weight="bold" fill="#a855f7" opacity="0.3">
+                                    /&gt;
+                                </text>
+                            </g> <!-- Laptop -->
+                            <rect x="45" y="60" width="110" height="70" rx="5" fill="none" stroke="#6366f1"
+                                stroke-width="2" />
+                            <rect x="50" y="65" width="100" height="55" fill="#1e293b" stroke="#6366f1"
+                                stroke-width="1" />
+                            <line x1="45" y1="135" x2="155" y2="135" stroke="#6366f1" stroke-width="3" />
+                            <circle cx="100" cy="140" r="3" fill="#6366f1" /> <!-- Code Lines in Screen -->
+                            <line x1="60" y1="75" x2="90" y2="75" stroke="#a855f7" stroke-width="1.5" opacity="0.8" />
+                            <line x1="60" y1="85" x2="140" y2="85" stroke="#6366f1" stroke-width="1.5" opacity="0.8" />
+                            <line x1="60" y1="95" x2="120" y2="95" stroke="#a855f7" stroke-width="1.5" opacity="0.8" />
+                            <line x1="60" y1="105" x2="140" y2="105" stroke="#6366f1" stroke-width="1.5"
+                                opacity="0.8" />
+                            <line x1="60" y1="115" x2="100" y2="115" stroke="#a855f7" stroke-width="1.5"
+                                opacity="0.8" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section><!-- About Section -->
+        <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-8">
+                <div class="divider"></div>
+                <h2 class="section-title gradient-text mt-6">About Me</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div style="color: #cbd5e1;">
+                    <p class="text-lg mb-6 leading-relaxed">I'm a BCA graduate from Raja Maharishi Pratap Singh
+                        University, graduating in 2025. Throughout my academic journey, I've developed a strong
+                        foundation in web development, software engineering principles, and modern technologies.</p>
+                    <p class="text-lg mb-6 leading-relaxed">My passion for creating intuitive and responsive web
+                        applications drives me to continuously learn and adapt to the latest industry trends. I believe
+                        in writing clean, maintainable code and creating user experiences that are both beautiful and
+                        functional.</p>
+                    <p class="text-lg leading-relaxed">When I'm not coding, I love exploring new web technologies,
+                        contributing to open-source projects, and sharing knowledge with the developer community.</p>
+                </div>
+                <div class="space-y-4">
+                    <div
+                        style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 1.5rem; border-radius: 12px;">
+                        <h3 class="font-semibold mb-3" style="color: #f1f5f9;">🎓 Education</h3>
+                        <p class="text-lg mb-2 font-semibold" style="color: #e0e7ff;">Bachelor of Computer Applications
+                            (BCA)</p>
+                        <p style="color: #cbd5e1;">Raja Maharishi Pratap Singh University</p>
+                        <p class="text-sm mt-2" style="color: #a1a5b4;">Graduating: 2025</p>
+                    </div>
+                    <div
+                        style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem; border-radius: 12px;">
+                        <h3 class="font-semibold mb-3" style="color: #f1f5f9;">🎯 Focus Areas</h3>
+                        <ul class="space-y-2" style="color: #cbd5e1;">
+                            <li>✓ Frontend Development (React, HTML, CSS, JavaScript)</li>
+                            <li>✓ Responsive Web Design</li>
+                            <li>✓ Web Standards &amp; Best Practices</li>
+                            <li>✓ UI/UX Implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Skills Section -->
+        <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-12">
+                <div class="divider"></div>
+                <h2 class="section-title gradient-text mt-6">Skills &amp; Technologies</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6"><!-- Frontend -->
+                <div class="skill-card"
+                    style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 2rem; border-radius: 12px;">
+                    <div class="text-4xl mb-4">
+                        🎨
+                    </div>
+                    <h3 class="text-xl font-bold mb-4" style="color: #f1f5f9;">Frontend</h3>
+                    <div class="space-y-2"><span class="badge">React</span> <span class="badge">HTML5</span> <span
+                            class="badge">CSS3</span> <span class="badge">JavaScript</span> <span class="badge">Tailwind
+                            CSS</span> <span class="badge">Responsive Design</span>
+                    </div>
+                </div><!-- Backend Basics -->
+                <div class="skill-card"
+                    style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 2rem; border-radius: 12px;">
+                    <div class="text-4xl mb-4">
+                        ⚙️
+                    </div>
+                    <h3 class="text-xl font-bold mb-4" style="color: #f1f5f9;">Backend Basics</h3>
+                    <div class="space-y-2"><span class="badge">JavaScript</span> <span class="badge">Node.js</span>
+                        <span class="badge">Express</span> <span class="badge">REST APIs</span> <span
+                            class="badge">MongoDB</span> <span class="badge">SQL</span>
+                    </div>
+                </div><!-- Tools & Others -->
+                <div class="skill-card"
+                    style="background: rgba(236, 72, 153, 0.05); border: 1px solid rgba(236, 72, 153, 0.2); padding: 2rem; border-radius: 12px;">
+                    <div class="text-4xl mb-4">
+                        🛠️
+                    </div>
+                    <h3 class="text-xl font-bold mb-4" style="color: #f1f5f9;">Tools &amp; Others</h3>
+                    <div class="space-y-2"><span class="badge">Git &amp; GitHub</span> <span class="badge">VS
+                            Code</span> <span class="badge">Figma</span> <span class="badge">DevTools</span> <span
+                            class="badge">npm/yarn</span> <span class="badge">Web Hosting</span>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Projects Section -->
+        <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-12">
+                <div class="divider"></div>
+                <h2 class="section-title gradient-text mt-6">Featured Projects</h2>
+                <p style="color: #cbd5e1; font-size: 1.1rem;">Showcase of my work and learning journey</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8"><!-- Project 1 -->
+                <div class="project-card"
+                    style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 2rem; overflow: hidden;">
+                    <div
+                        style="background: linear-gradient(135deg, #6366f1, #a855f7); height: 8px; margin: -2rem -2rem 2rem -2rem;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2" style="color: #f1f5f9;">Portfolio Website</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">A responsive personal portfolio built with React
+                        and Tailwind CSS, showcasing projects and skills with smooth animations.</p>
+                    <div class="flex flex-wrap gap-2 mb-4"><span class="badge">React</span> <span class="badge">Tailwind
+                            CSS</span> <span class="badge">Responsive</span>
+                    </div><a href="#" class="text-sm font-semibold" style="color: #6366f1;">Learn More →</a>
+                </div><!-- Project 2 -->
+                <div class="project-card"
+                    style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 2rem; overflow: hidden;">
+                    <div
+                        style="background: linear-gradient(135deg, #a855f7, #ec4899); height: 8px; margin: -2rem -2rem 2rem -2rem;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2" style="color: #f1f5f9;">Todo Application</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">A feature-rich todo app with local storage,
+                        allowing users to add, edit, delete tasks with a clean and intuitive interface.</p>
+                    <div class="flex flex-wrap gap-2 mb-4"><span class="badge">JavaScript</span> <span
+                            class="badge">HTML/CSS</span> <span class="badge">Local Storage</span>
+                    </div><a href="#" class="text-sm font-semibold" style="color: #a855f7;">Learn More →</a>
+                </div><!-- Project 3 -->
+                <div class="project-card"
+                    style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 2rem; overflow: hidden;">
+                    <div
+                        style="background: linear-gradient(135deg, #6366f1, #ec4899); height: 8px; margin: -2rem -2rem 2rem -2rem;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2" style="color: #f1f5f9;">Weather Dashboard</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Real-time weather application using API
+                        integration, displaying current conditions and forecasts with a beautiful UI.</p>
+                    <div class="flex flex-wrap gap-2 mb-4"><span class="badge">React</span> <span class="badge">API
+                            Integration</span> <span class="badge">JavaScript</span>
+                    </div><a href="#" class="text-sm font-semibold" style="color: #6366f1;">Learn More →</a>
+                </div><!-- Project 4 -->
+                <div class="project-card"
+                    style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 2rem; overflow: hidden;">
+                    <div
+                        style="background: linear-gradient(135deg, #a855f7, #6366f1); height: 8px; margin: -2rem -2rem 2rem -2rem;">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2" style="color: #f1f5f9;">E-commerce Product Page</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Responsive product page with image gallery,
+                        product details, and shopping cart functionality built with vanilla JavaScript.</p>
+                    <div class="flex flex-wrap gap-2 mb-4"><span class="badge">HTML/CSS</span> <span
+                            class="badge">JavaScript</span> <span class="badge">Responsive</span>
+                    </div><a href="#" class="text-sm font-semibold" style="color: #a855f7;">Learn More →</a>
+                </div>
+            </div>
+        </section><!-- Education Section -->
+        <section id="education" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-12">
+                <div class="divider"></div>
+                <h2 class="section-title gradient-text mt-6">Education &amp; Certifications</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8"><!-- Main Education -->
+                <div
+                    style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 12px; padding: 2rem;">
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-bold mb-2" style="color: #f1f5f9;">Bachelor of Computer Applications
+                            (BCA)</h3>
+                        <p class="text-lg font-semibold mb-2" style="color: #cbd5e1;">Raja Maharishi Pratap Singh
+                            University</p>
+                        <p style="color: #a1a5b4; margin-bottom: 1rem;">Expected Graduation: 2025</p>
+                        <ul style="color: #cbd5e1;" class="space-y-2">
+                            <li>✓ Core Subjects: Data Structures, DBMS, Web Development, Software Engineering</li>
+                            <li>✓ Programming Languages: C, C++, Java, JavaScript</li>
+                            <li>✓ Web Technologies: HTML, CSS, React, Node.js</li>
+                            <li>✓ GPA: [Your GPA]</li>
+                        </ul>
+                    </div>
+                </div><!-- Certifications & Training -->
+                <div class="space-y-4">
+                    <div
+                        style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 1.5rem; border-radius: 12px;">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold mb-1" style="color: #f1f5f9;">React Fundamentals Course</h4>
+                            <p class="text-sm" style="color: #a1a5b4;">Completed 2024</p>
+                            <p style="color: #cbd5e1;">Online certification covering React basics, hooks, and component
+                                architecture</p>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); padding: 1.5rem; border-radius: 12px;">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold mb-1" style="color: #f1f5f9;">Responsive Web Design</h4>
+                            <p class="text-sm" style="color: #a1a5b4;">Completed 2024</p>
+                            <p style="color: #cbd5e1;">Training in mobile-first design and CSS grid/flexbox layouts</p>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(236, 72, 153, 0.05); border: 1px solid rgba(236, 72, 153, 0.2); padding: 1.5rem; border-radius: 12px;">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold mb-1" style="color: #f1f5f9;">JavaScript ES6+ Mastery</h4>
+                            <p class="text-sm" style="color: #a1a5b4;">Completed 2024</p>
+                            <p style="color: #cbd5e1;">In-depth course on modern JavaScript features and async
+                                programming</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Contact Section -->
+        <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-12">
+                <div class="divider"></div>
+                <h2 class="section-title gradient-text mt-6">Get In Touch</h2>
+                <p style="color: #cbd5e1; font-size: 1.1rem;">I'm always open to exciting opportunities and new
+                    challenges</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center"><!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(99, 102, 241, 0.2); color: #6366f1;">
+                            📧
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1" style="color: #f1f5f9;">Email</h4><a id="email-link"
+                                href="mailto:your@email.com" style="color: #cbd5e1;">your@email.com</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(168, 85, 247, 0.2); color: #a855f7;">
+                            📱
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1" style="color: #f1f5f9;">Phone</h4><a id="phone-link"
+                                href="tel:+919876543210" style="color: #cbd5e1;">+91 98765 43210</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                            style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">
+                            🔗
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2" style="color: #f1f5f9;">Social Links</h4>
+                            <div class="flex gap-4"><a id="github-social" href="#" target="_blank"
+                                    rel="noopener noreferrer" class="social-icon" title="GitHub">
+                                    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg></a> <a id="linkedin-social" href="#" target="_blank"
+                                    rel="noopener noreferrer" class="social-icon" title="LinkedIn">
+                                    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                                    </svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Quick Contact Form -->
+                <div
+                    style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 2rem;">
+                    <h3 class="text-2xl font-bold mb-6" style="color: #f1f5f9;">Send Me a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div><label class="block text-sm font-semibold mb-2" style="color: #cbd5e1;">Name</label> <input
+                                type="text" placeholder="Your name" required
+                                style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(99, 102, 241, 0.3); color: #f1f5f9; padding: 0.75rem 1rem; border-radius: 8px; width: 100%; outline: none; transition: all 0.3s ease;"
+                                onfocus="this.style.borderColor='#6366f1'; this.style.boxShadow='0 0 0 3px rgba(99, 102, 241, 0.1)';"
+                                onblur="this.style.borderColor='rgba(99, 102, 241, 0.3)'; this.style.boxShadow='none';">
+                        </div>
+                        <div><label class="block text-sm font-semibold mb-2" style="color: #cbd5e1;">Email</label>
+                            <input type="email" placeholder="your@email.com" required
+                                style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(99, 102, 241, 0.3); color: #f1f5f9; padding: 0.75rem 1rem; border-radius: 8px; width: 100%; outline: none; transition: all 0.3s ease;"
+                                onfocus="this.style.borderColor='#6366f1'; this.style.boxShadow='0 0 0 3px rgba(99, 102, 241, 0.1)';"
+                                onblur="this.style.borderColor='rgba(99, 102, 241, 0.3)'; this.style.boxShadow='none';">
+                        </div>
+                        <div><label class="block text-sm font-semibold mb-2" style="color: #cbd5e1;">Message</label>
+                            <textarea placeholder="Your message..." rows="4" required
+                                style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(99, 102, 241, 0.3); color: #f1f5f9; padding: 0.75rem 1rem; border-radius: 8px; width: 100%; outline: none; transition: all 0.3s ease; resize: none; font-family: 'Space Grotesk', sans-serif;"
+                                onfocus="this.style.borderColor='#6366f1'; this.style.boxShadow='0 0 0 3px rgba(99, 102, 241, 0.1)';"
+                                onblur="this.style.borderColor='rgba(99, 102, 241, 0.3)'; this.style.boxShadow='none';"></textarea>
+                        </div><button type="submit" class="cta-button w-full py-3 rounded-lg text-white font-semibold">
+                            Send Message </button>
+                        <p id="form-message"
+                            style="color: #a1a5b4; font-size: 0.9rem; text-align: center; display: none;"></p>
+                    </form>
+                </div>
+            </div>
+        </section><!-- Footer -->
+        <footer class="border-t" style="border-color: rgba(99, 102, 241, 0.1); background: rgba(15, 23, 42, 0.5);">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+                <p style="color: #a1a5b4;">© 2025 Your Name. All rights reserved.</p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">Designed &amp; Built with ❤️ | BCA
+                    Graduate</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+     const defaultConfig = {
+    full_name: 'Deepakshi Sharma',
+    headline: 'Web Developer | Crafting Beautiful Digital Experiences',
+    about_text: 'Fresh BCA graduate passionate about creating responsive, user-friendly web applications. I combine creativity with clean code to build solutions that matter.',
+    email: 'deepakshisharma1926@gmail.com',
+    phone: '+91 8130428743',
+    github_url: 'https://github.com/deepakshisharma1926-art',
+    linkedin_url: 'https://www.linkedin.com/in/deepakshi-sharma2305'
+};
+
+
+
+
+        let config = { ...defaultConfig };
+
+        function updatePortfolio() {
+            document.getElementById('full-name-hero').textContent = config.full_name || defaultConfig.full_name;
+            document.getElementById('headline-hero').textContent = config.headline || defaultConfig.headline;
+            document.getElementById('about-hero').textContent = config.about_text || defaultConfig.about_text;
+            document.getElementById('email-link').href = `mailto:${config.email}`;
+            document.getElementById('email-link').textContent = config.email || defaultConfig.email;
+            document.getElementById('phone-link').href = `tel:${config.phone.replace(/\s/g, '')}`;
+            document.getElementById('phone-link').textContent = config.phone || defaultConfig.phone;
+
+            if (config.github_url) {
+                document.getElementById('github-link').href = config.github_url;
+                document.getElementById('github-social').href = config.github_url;
+            }
+            if (config.linkedin_url) {
+                document.getElementById('linkedin-link').href = config.linkedin_url;
+                document.getElementById('linkedin-social').href = config.linkedin_url;
+            }
+        }
+
+        async function onConfigChange(newConfig) {
+            config = { ...config, ...newConfig };
+            updatePortfolio();
+        }
+
+        function mapToCapabilities(currentConfig) {
+            return {
+                recolorables: [
+                    {
+                        get: () => '#6366f1',
+                        set: (value) => { }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(currentConfig) {
+            return new Map([
+                ['full_name', config.full_name || defaultConfig.full_name],
+                ['headline', config.headline || defaultConfig.headline],
+                ['about_text', config.about_text || defaultConfig.about_text],
+                ['email', config.email || defaultConfig.email],
+                ['phone', config.phone || defaultConfig.phone],
+                ['github_url', config.github_url || defaultConfig.github_url],
+                ['linkedin_url', config.linkedin_url || defaultConfig.linkedin_url]
+            ]);
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        updatePortfolio();
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const message = document.getElementById('form-message');
+
+            message.textContent = '✅ Message sent! I\'ll get back to you soon.';
+            message.style.display = 'block';
+            message.style.color = '#10b981';
+
+            setTimeout(() => {
+                form.reset();
+                message.style.display = 'none';
+            }, 3000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9caa2aa08208548c',t:'MTc3MDU0MzYzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
